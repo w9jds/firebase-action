@@ -12,7 +12,7 @@ This Action for [firebase-tools](https://github.com/firebase/firebase-tools) ena
 
 #### Example
 
-To authenticate with, and publish to, a registry other than `registry.npmjs.org`:
+To authenticate with Firebase, and deploy to Firebase Hosting:
 
 ```hcl
 action "Deploy Production Site" {
