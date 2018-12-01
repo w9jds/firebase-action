@@ -9,11 +9,11 @@ LABEL maintainer="Jeremy Shore <w9jds@github.com>"
 LABEL com.github.actions.name="GitHub Action for Firebase"
 LABEL com.github.actions.description="Wraps the firebase-tools CLI to enable common commands."
 LABEL com.github.actions.icon="package"
-LABEL com.github.actions.color="red"
+LABEL com.github.actions.color="gray-dark"
 
 RUN npm install -g firebase-tools
 
-COPY LICENSE README.md THIRD_PARTY_NOTICE.md /
+COPY LICENSE README.md /
 COPY "entrypoint.sh" "/entrypoint.sh"
 
 ENTRYPOINT ["/entrypoint.sh"]
