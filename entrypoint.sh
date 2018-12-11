@@ -7,8 +7,6 @@ if [ -z "$FIREBASE_TOKEN" ]; then
     exit 126
 fi
 
-firebase login
-
 if [ -n "$PROJECT_ID"]; then
     firebase use $PROJECT_ID
 fi
