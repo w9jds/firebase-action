@@ -8,9 +8,8 @@ if [ -z "$FIREBASE_TOKEN" ]; then
 fi
 
 if [ -n "$PROJECT_ID" ]; then
-    echo "setting firebase project $PROJECT_ID"
+    echo "setting firebase project to $PROJECT_ID"
     firebase use --add $PROJECT_ID
 fi
 
-echo "Running firebase $*"
 sh -c "firebase $*"
