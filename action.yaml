@@ -8,6 +8,7 @@ inputs:
   command:
     description: 'firebase-tools command to run'
     require: true
+    default: '--help'
 runs:
   using: 'docker'
   image: 'Dockerfile'
