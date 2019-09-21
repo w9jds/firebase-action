@@ -4,7 +4,7 @@ This Action for [firebase-tools](https://github.com/firebase/firebase-tools) ena
 
 ## Inputs
 
-* `command` - **Required**. This is the arguments you want to use for the `firebase` cli
+* `args` - **Required**. This is the arguments you want to use for the `firebase` cli
 
 
 ## Environment variables
@@ -18,24 +18,45 @@ This Action for [firebase-tools](https://github.com/firebase/firebase-tools) ena
 To authenticate with Firebase, and deploy to Firebase Hosting:
 
 ```yaml
-deploy:
-  name: Deploy
-  needs: build
-  runs-on: ubuntu-latest
-  steps:
-    - name: Checkout Repo
-      uses: actions/checkout@master
-    - name: Download Artifact
-      uses: actions/download-artifact@master
-      with:
-        name: dist
-    - name: Deploy to Firebase
-      uses: w9jds/firebase-action@master
-      with:
-        command: 'deploy --only hosting:prod'
-      env:
-        PROJECT_ID: new-eden-storage-a5c23
-        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+name: Build and Deploy
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Install Dependencies
+        run: npm install
+      - name: Build
+        run: npm run build-prod
+      - name: Archive Production Artifact
+        uses: actions/upload-artifact@master
+        with:
+          name: dist
+          path: dist
+  deploy:
+    name: Deploy
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Download Artifact
+        uses: actions/download-artifact@master
+        with:
+          name: dist
+      - name: Deploy to Firebase
+        uses: w9jds/firebase-action@develop
+        with:
+          args: deploy --only hosting:prod
+        env:
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 ```
 
 ## License
@@ -43,24 +64,6 @@ deploy:
 The Dockerfile and associated scripts and documentation in this project are released under the [MIT License](LICENSE).
 
 
-# Hello world docker action
+### Recommendation
 
-This action prints "Hello World" or "Hello" + the name of a person to greet to the log.
-
-## Inputs
-
-### `who-to-greet`
-
-**Required** The name of the person to greet. Default `"World"`.
-
-## Outputs
-
-### `time`
-
-The time we greeted you.
-
-## Example usage
-
-uses: actions/hello-world-docker-action@v1
-with:
-  who-to-greet: 'Mona the Octocat'
+If you decide to do seperate jobs for build and deployment (which is probably advisable), then make sure to clone your repo as the Firebase-cli requires the firebase repo to deploy (specifically the `firebase.json`)
