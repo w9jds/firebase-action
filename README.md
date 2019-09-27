@@ -52,7 +52,7 @@ jobs:
         with:
           name: dist
       - name: Deploy to Firebase
-        uses: w9jds/firebase-action@develop
+        uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting:prod
         env:
