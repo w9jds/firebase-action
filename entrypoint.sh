@@ -12,4 +12,8 @@ if [ -n "$PROJECT_ID" ]; then
     firebase use --add $PROJECT_ID
 fi
 
+if [ -n "$PROJECT_PATH" ]; then
+    cd $PROJECT_PATH
+fi
+
 sh -c "firebase $*"
