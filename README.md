@@ -13,6 +13,8 @@ This Action for [firebase-tools](https://github.com/firebase/firebase-tools) ena
 
 * `PROJECT_ID` - **Optional**. To specify a specific project to use for all commands, not required if you specify a project in your `.firebaserc` file.
 
+* `PROJECT_PATH` - **Optional**. The path to `firebase.json` if it doesn't exist at the root of your repository. e.g. `./my-app`
+
 ## Example
 
 To authenticate with Firebase, and deploy to Firebase Hosting:
