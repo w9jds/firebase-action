@@ -56,10 +56,13 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting:prod
+          args: deploy --only hosting
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 ```
+
+If you have multiple hosting environments you can specify which one in the args line. 
+e.g. `args: deploy --only hosting:[environment name]`
 
 ## License
 
