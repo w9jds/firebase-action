@@ -9,7 +9,12 @@ This Action for [firebase-tools](https://github.com/firebase/firebase-tools) ena
 
 ## Environment variables
 
-* `FIREBASE_TOKEN` - **Required**. The token to use for authentication. This token can be aquired through the `firebase login:ci` command.
+* `FIREBASE_TOKEN` - **Required if GCP_SA_KEY is not set**. The token to use for authentication. This token can be aquired through the `firebase login:ci` command.
+
+* `GCP_SA_KEY` - **Required if FIREBASE_TOKEN is not set**. A base64 encoded private key (json format) for a Service Account with the `Firebase Admin` role in the project, and if your deploying functions you would also need the `Cloud Functions Developer` role. 
+And since the deploy service account is using the App Engine default service account in the deploy process, it also 
+needs the `Service Account User` role.
+If your only doing Hosting `Firebase Hosting Admin` is enough.
 
 * `PROJECT_ID` - **Optional**. To specify a specific project to use for all commands, not required if you specify a project in your `.firebaserc` file.
 
@@ -60,6 +65,13 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 ```
+Alternatively:
+
+```yaml
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+```
+
 
 If you have multiple hosting environments you can specify which one in the args line. 
 e.g. `args: deploy --only hosting:[environment name]`
