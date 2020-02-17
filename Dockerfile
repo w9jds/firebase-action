@@ -10,12 +10,12 @@ LABEL com.github.actions.description="Wraps the firebase-tools CLI to enable com
 LABEL com.github.actions.icon="package"
 LABEL com.github.actions.color="gray-dark"
 
-ENV JAVA_HOME="~/jdk"
+ENV JAVA_HOME="/opt/jdk"
 ENV PATH="${PATH}:${JAVA_HOME}/bin"
 
 RUN apt-get update && apt-get install -y wget
 RUN npm install -g firebase-tools
-RUN mkdir -p ~/jdk/ && wget -qO- https://github.com/AdoptOpenJDK/openjdk13-binaries/releases/download/jdk-13.0.2%2B8/OpenJDK13U-jre_x64_linux_hotspot_13.0.2_8.tar.gz | tar xvz -C ~/jdk --strip-components=1
+RUN mkdir -p ${JAVA_HOME} && wget -qO- https://github.com/AdoptOpenJDK/openjdk11-binaries/releases/download/jdk-11.0.6%2B10/OpenJDK11U-jdk_x64_linux_hotspot_11.0.6_10.tar.gz | tar xvz -C ${JAVA_HOME} --strip-components=1
 
 
 COPY LICENSE README.md /
