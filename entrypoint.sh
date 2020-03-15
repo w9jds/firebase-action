@@ -23,4 +23,6 @@ if [ -n "$PROJECT_ID" ]; then
     firebase use --add "$PROJECT_ID"
 fi
 
+echo "$*"
+
 sh -c "firebase $*"
