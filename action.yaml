@@ -1,5 +1,5 @@
 name: 'GitHub Action for Firebase with JDK'
-author: 'OC Fulfillment Team'
+author: 'Jeremy Shore'
 description: 'Wraps the firebase-tools CLI and JDK to enable common commands and run firebase emulator.'
 branding:
   icon: 'package'

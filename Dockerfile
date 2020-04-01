@@ -1,9 +1,9 @@
 FROM node:10-slim
 
 LABEL version="1.1.0"
-LABEL repository="https://github.com/fulfillmenttools/firebase-action"
-LABEL homepage="https://github.com/fulfillmenttools/firebase-action"
-LABEL maintainer="OC Fulfillment Team"
+LABEL repository="https://github.com/w9jds/firebase-action"
+LABEL homepage="https://github.com/w9jds/firebase-action"
+LABEL maintainer="Jeremy Shore <w9jds@github.com>"
 
 LABEL com.github.actions.name="GitHub Action for Firebase with JDK"
 LABEL com.github.actions.description="Wraps the firebase-tools CLI to enable common commands."
