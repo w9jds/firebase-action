@@ -1,6 +1,6 @@
-FROM node:14.4.0-slim
+FROM node:12.18.1-alpine
 
-LABEL version="1.2.0"
+LABEL version="1.2.1"
 LABEL repository="https://github.com/w9jds/firebase-action"
 LABEL homepage="https://github.com/w9jds/firebase-action"
 LABEL maintainer="Jeremy Shore <w9jds@github.com>"
@@ -10,7 +10,8 @@ LABEL com.github.actions.description="Wraps the firebase-tools CLI to enable com
 LABEL com.github.actions.icon="package"
 LABEL com.github.actions.color="gray-dark"
 
-ENV NPM_CONFIG_USER root
+# git is now required when install firebase-tools
+RUN apk update && apk upgrade && apk add --no-cache git
 
 RUN npm install -g firebase-tools
 
