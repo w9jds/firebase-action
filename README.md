@@ -20,6 +20,10 @@ If your only doing Hosting `Firebase Hosting Admin` is enough.
 
 * `PROJECT_PATH` - **Optional**. The path to `firebase.json` if it doesn't exist at the root of your repository. e.g. `./my-app`
 
+## Inputs
+
+* `isEmulator`  **Required if you want to use firebase emulators** defaults to false
+
 ## Example
 
 To authenticate with Firebase, and deploy to Firebase Hosting:

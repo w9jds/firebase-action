@@ -7,6 +7,11 @@ if [ -z "$FIREBASE_TOKEN" ] && [ -z "$GCP_SA_KEY" ]; then
   exit 126
 fi
 
+if [ "$*" = "--help" ]; then
+  echo "args weren't supplied, so action ran with --help command"
+  exit 126
+fi
+
 if [ -n "$GCP_SA_KEY" ]; then
   echo "Storing GCP_SA_KEY in /opt/gcp_key.json"
   echo "$GCP_SA_KEY" | base64 -d > /opt/gcp_key.json
@@ -19,8 +24,8 @@ if [ -n "$PROJECT_PATH" ]; then
 fi
 
 if [ -n "$PROJECT_ID" ]; then
-    echo "setting firebase project to $PROJECT_ID"
-    firebase use --add "$PROJECT_ID"
+  echo "setting firebase project to $PROJECT_ID"
+  firebase use --add "$PROJECT_ID"
 fi
 
 sh -c "firebase $*"

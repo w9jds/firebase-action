@@ -10,6 +10,10 @@ LABEL com.github.actions.description="Wraps the firebase-tools CLI to enable com
 LABEL com.github.actions.icon="package"
 LABEL com.github.actions.color="gray-dark"
 
+RUN if [ "$INPUT_ISEMULATOR" = true ]; then \ 
+  apk --update add openjdk7-jre; \ 
+fi
+
 # git is now required when install firebase-tools
 RUN apk update && apk upgrade && apk add --no-cache git
 
