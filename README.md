@@ -4,8 +4,9 @@ This Action for [firebase-tools](https://github.com/firebase/firebase-tools) ena
 
 ## Inputs
 
-* `args` - **Required**. This is the arguments you want to use for the `firebase` cli
+* `isEmulator` - **Required for emulator** defaults to false
 
+* `args` - **Required**. This is the arguments you want to use for the `firebase` cli
 
 ## Environment variables
 
@@ -20,21 +21,16 @@ If your only doing Hosting `Firebase Hosting Admin` is enough.
 
 * `PROJECT_PATH` - **Optional**. The path to `firebase.json` if it doesn't exist at the root of your repository. e.g. `./my-app`
 
-## Inputs
+## Examples
 
-* `isEmulator`  **Required if you want to use firebase emulators** defaults to false
-
-## Example
-
-To authenticate with Firebase, and deploy to Firebase Hosting:
-
+### Hosting Deployment
+---
 ```yaml
 name: Build and Deploy
 on:
   push:
     branches:
       - master
-
 jobs:
   build:
     name: Build
@@ -70,14 +66,42 @@ jobs:
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 ```
-Alternatively:
 
+### Functions Emulator
+---
 ```yaml
+name: Firebase Functions Test
+on:
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    name: Emulate Mocha Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@master
+      - name: Go to Functions
+        run: cd functions
+      - name: Install Dependencies
+        run: npm install
+      - name: Test Functions
+        uses: w9jds/firebase-action@master
+        with:
+          isEmulator: true
+          args: emulators:exec \"npm run test\"
         env:
-          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 ```
 
+#### Alternate Auth:
+```yaml
+  env:
+    GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+```
 
+#### Environment Based Deploy
 If you have multiple hosting environments you can specify which one in the args line. 
 e.g. `args: deploy --only hosting:[environment name]`
 
