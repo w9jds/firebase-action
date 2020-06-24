@@ -4,11 +4,6 @@ description: 'Wraps the firebase-tools CLI to enable common commands.'
 branding:
   icon: 'package'
   color: 'gray-dark'
-inputs:
-  isEmulator:
-    description: 'Configure for Emulation'
-    required: false
-    default: false
 runs:
   using: 'docker'
   image: 'Dockerfile'

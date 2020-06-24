@@ -1,5 +1,7 @@
 FROM node:10.21.0-alpine
 
+ARG isEmulator=false
+
 LABEL version="1.2.1"
 LABEL repository="https://github.com/w9jds/firebase-action"
 LABEL homepage="https://github.com/w9jds/firebase-action"
@@ -10,7 +12,7 @@ LABEL com.github.actions.description="Wraps the firebase-tools CLI to enable com
 LABEL com.github.actions.icon="package"
 LABEL com.github.actions.color="gray-dark"
 
-RUN if [ "$INPUT_ISEMULATOR" = true ]; then \ 
+RUN if [ "$isEmulator" = true ]; then \ 
   apk --update add openjdk7-jre; \ 
 fi
 

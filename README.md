@@ -4,8 +4,6 @@ This Action for [firebase-tools](https://github.com/firebase/firebase-tools) ena
 
 ## Inputs
 
-* `isEmulator` - **Required for emulator** defaults to false
-
 * `args` - **Required**. This is the arguments you want to use for the `firebase` cli
 
 ## Environment variables
@@ -63,34 +61,6 @@ jobs:
         uses: w9jds/firebase-action@master
         with:
           args: deploy --only hosting
-        env:
-          FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
-```
-
-### Functions Emulator
----
-```yaml
-name: Firebase Functions Test
-on:
-  pull_request:
-    branches:
-      - master
-jobs:
-  build:
-    name: Emulate Mocha Tests
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repo
-        uses: actions/checkout@master
-      - name: Go to Functions
-        run: cd functions
-      - name: Install Dependencies
-        run: npm install
-      - name: Test Functions
-        uses: w9jds/firebase-action@master
-        with:
-          isEmulator: true
-          args: emulators:exec \"npm run test\"
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 ```
