@@ -1,5 +1,5 @@
-name: 'GitHub Action for Firebase'
-author: 'Jeremy Shore'
+name: 'GitHub Action for Firebase with Full Node Image'
+author: 'Adam Urban (forked from Jeremy Shore)'
 description: 'Wraps the firebase-tools CLI to enable common commands.'
 branding:
   icon: 'package'
