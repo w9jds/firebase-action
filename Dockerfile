@@ -1,6 +1,6 @@
 FROM node:lts
 
-LABEL version="1.2.1"
+LABEL version="1.3.0"
 LABEL repository="https://github.com/urbanisierung/firebase-action"
 LABEL homepage="https://github.com/urbanisierung/firebase-action"
 LABEL maintainer="Adam Urban <urbanisierung@github.com>"
@@ -11,7 +11,7 @@ LABEL com.github.actions.icon="package"
 LABEL com.github.actions.color="gray-dark"
 
 # git is now required when install firebase-tools
-RUN apk update && apk upgrade && apk add --no-cache git
+# RUN apk update && apk upgrade && apk add --no-cache git
 
 RUN npm install -g firebase-tools
 
