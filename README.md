@@ -2,6 +2,8 @@
 
 Forked from [https://github.com/w9jds/firebase-action](https://github.com/w9jds/firebase-action). Difference: use full node image instead of `alpine`.
 
+Marketplace: [https://github.com/marketplace/actions/github-action-for-firebase-with-full-node-image](https://github.com/marketplace/actions/github-action-for-firebase-with-full-node-image)
+
 This Action for [firebase-tools](https://github.com/firebase/firebase-tools) enables arbitrary actions with the `firebase` command-line client.
 
 ## Inputs
