@@ -13,7 +13,7 @@ LABEL com.github.actions.color="gray-dark"
 # git is now required when install firebase-tools
 RUN apk update && apk upgrade && apk add --no-cache git
 
-RUN npm install -g firebase-tools
+RUN npm install -g firebase-tools@v8.12.1
 
 COPY LICENSE README.md /
 COPY "entrypoint.sh" "/entrypoint.sh"
