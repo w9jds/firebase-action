@@ -10,10 +10,10 @@ LABEL com.github.actions.description="Wraps the firebase-tools CLI to enable com
 LABEL com.github.actions.icon="package"
 LABEL com.github.actions.color="gray-dark"
 
-# git is now required when install firebase-tools
-RUN apk update && apk upgrade && apk add --no-cache git
+RUN apk --update add openjdk7-jre
+RUN apk add --no-cache git
 
-RUN npm install -g firebase-tools
+RUN npm install -g firebase-tools@8.15.1
 
 COPY LICENSE README.md /
 COPY "entrypoint.sh" "/entrypoint.sh"
