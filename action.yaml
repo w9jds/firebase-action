@@ -6,4 +6,4 @@ branding:
   color: 'gray-dark'
 runs:
   using: 'docker'
-  image: 'Dockerfile'
+  image: 'docker://w9jds/firebase-action:latest'
