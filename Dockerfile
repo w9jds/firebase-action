@@ -10,10 +10,10 @@ LABEL com.github.actions.description="Wraps the firebase-tools CLI to enable com
 LABEL com.github.actions.icon="package"
 LABEL com.github.actions.color="gray-dark"
 
-RUN apk --update add openjdk7-jre
+RUN apk --update add openjdk8-jre
 RUN apk add --no-cache git
 
-RUN npm install -g firebase-tools@8.15.1
+RUN npm install -g firebase-tools@8.16.2
 
 COPY LICENSE README.md /
 COPY "entrypoint.sh" "/entrypoint.sh"
