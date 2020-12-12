@@ -9,6 +9,11 @@ fi
 
 if [ -n "$GCP_SA_KEY" ]; then
   echo "Storing GCP_SA_KEY in /opt/gcp_key.json"
+  CHECK_ENCODING=$(echo "$GCP_SA_KEY" | base64 -d &>/dev/null; echo $?)
+  if [ "$CHECK_ENCODING" -ne 0 ]; then
+    echo "Error: GCP_SA_KEY must be base64 encoded."
+    exit 1
+  fi
   echo "$GCP_SA_KEY" | base64 -d > /opt/gcp_key.json
   echo "Exporting GOOGLE_APPLICATION_CREDENTIALS=/opt/gcp_key.json"
   export GOOGLE_APPLICATION_CREDENTIALS=/opt/gcp_key.json
