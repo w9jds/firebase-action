@@ -77,6 +77,13 @@ Alternatively:
 If you have multiple hosting environments you can specify which one in the args line. 
 e.g. `args: deploy --only hosting:[environment name]`
 
+If you want to add a message to a deployment (e.g. the Git commit message) you need to take extra care and escape the quotes or the YAML breaks.
+
+```yaml
+        with:
+          args: deploy --message \"${{ github.event.head_commit.message }}\"
+```
+
 ## License
 
 The Dockerfile and associated scripts and documentation in this project are released under the [MIT License](LICENSE).
