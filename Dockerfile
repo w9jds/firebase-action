@@ -13,8 +13,8 @@ LABEL com.github.actions.color="gray-dark"
 RUN apk --update add openjdk8-jre
 RUN apk add --no-cache git
 
-RUN npm i -g npm@7.10.0
-RUN npm i -g firebase-tools@9.10.0
+RUN npm i -g npm@7.16.0
+RUN npm i -g firebase-tools@9.12.1
 
 COPY LICENSE README.md /
 COPY "entrypoint.sh" "/entrypoint.sh"
