@@ -1,4 +1,4 @@
-name: Build
+name: Build and push Docker images
 
 on:
   push:
@@ -7,15 +7,18 @@ on:
 
 jobs:
   build:
-    name: docker build & push
+    name: Docker build & push
     runs-on: ubuntu-latest
     steps:
-      - name: checkout scm
-        uses: actions/checkout@v2
-      - name: docker/build-push
-        uses: docker/build-push-action@v1
-        with:
-          username: w9jds
-          password: ${{ secrets.DOCKER_PASSWORD }}
-          repository: w9jds/firebase-action
-          tags: latest
+    -
+      name: Login to DockerHub
+      uses: docker/login-action@v1
+      with:
+        username: w9jds
+        password: ${{ secrets.DOCKER_PASSWORD }}
+    -
+      name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        push: true
+        tags: w9jds/firebase-action:latest
