@@ -1,4 +1,4 @@
-FROM node:12.22.1-alpine
+FROM node:14.17.1-alpine
 
 LABEL version="1.2.2"
 LABEL repository="https://github.com/w9jds/firebase-action"
