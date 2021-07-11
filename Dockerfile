@@ -1,6 +1,6 @@
-FROM node:14.17.1-alpine
+FROM node:14.17.2-buster
 
-LABEL version="1.2.2"
+LABEL version="1.2.3"
 LABEL repository="https://github.com/w9jds/firebase-action"
 LABEL homepage="https://github.com/w9jds/firebase-action"
 LABEL maintainer="Jeremy Shore <w9jds@github.com>"
@@ -13,7 +13,7 @@ LABEL com.github.actions.color="gray-dark"
 RUN apk --update add openjdk8-jre
 RUN apk add --no-cache git
 
-RUN npm i -g npm@7.19.0
+RUN npm i -g npm@7.19.1
 RUN npm i -g firebase-tools@9.14.0
 
 COPY LICENSE README.md /
