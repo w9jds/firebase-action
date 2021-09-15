@@ -16,7 +16,7 @@ RUN add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
 RUN apt update && apt install -y adoptopenjdk-8-hotspot-jre git && apt autoremove --purge -y && apt clean -y
 
 RUN npm i -g npm@7.19.1
-RUN npm i -g firebase-tools@9.16.5
+RUN npm i -g firebase-tools@9.18.0
 
 COPY LICENSE README.md /
 COPY "entrypoint.sh" "/entrypoint.sh"
