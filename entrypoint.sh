@@ -23,4 +23,9 @@ if [ -n "$PROJECT_ID" ]; then
     firebase use --add "$PROJECT_ID"
 fi
 
+if [ -n "$ENV_VARIABLES" ]; then
+    echo "Setting environment variables for function"
+    firebase functions:config:set "$ENV_VARIABLES"
+fi
+
 sh -c "firebase $*"

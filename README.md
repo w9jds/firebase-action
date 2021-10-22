@@ -21,6 +21,8 @@ If you're only doing Hosting, `Firebase Hosting Admin` is enough.
 
 * `PROJECT_PATH` - **Optional**. The path to the folder containing `firebase.json` if it doesn't exist at the root of your repository. e.g. `./my-app`
 
+* `ENV_VARIABLES` - **Optional**. The environment variables for Firebase function.
+
 ## Example
 
 To authenticate with Firebase, and deploy to Firebase Hosting:
