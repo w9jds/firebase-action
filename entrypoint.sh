@@ -23,7 +23,7 @@ if [ -n "$PROJECT_ID" ]; then
     firebase use --add "$PROJECT_ID"
 fi
 
-if [ -n "$EXPORT_RUNTIME_CONFIG" = true ]; then
+if [ "$EXPORT_RUNTIME_CONFIG" = true ]; then
   echo "Exporting functions configuration variables > .runtimeconfig.json"
   firebase functions:config:get > .runtimeconfig.json
 fi
