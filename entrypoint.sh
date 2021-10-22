@@ -2,14 +2,14 @@
 
 set -e
 
-BASE64_PATTERN="([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)"
-
 if [ -z "$FIREBASE_TOKEN" ] && [ -z "$GCP_SA_KEY" ]; then
   echo "Either FIREBASE_TOKEN or GCP_SA_KEY is required to run commands with the firebase cli"
   exit 126
 fi
 
 if [ -n "$GCP_SA_KEY" ]; then
+  BASE64_PATTERN="([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)"
+
   # If encoded base64 key, decode and save
   if [[ "$GCP_SA_KEY" =~ $BASE64_PATTERN ]]; then
     echo "Storing and decodeding GCP_SA_KEY in /opt/gcp_key.json"
