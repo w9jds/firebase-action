@@ -2,7 +2,7 @@
 
 set -e
 
-BASE64_PATTERN="(ewo|eyJ|YTo|Tzo|PD[89]|aHR0cHM6L|aHR0cDo|rO0)[a-zA-Z0-9+/]+={0,2}"
+BASE64_PATTERN="([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)"
 
 if [ -z "$FIREBASE_TOKEN" ] && [ -z "$GCP_SA_KEY" ]; then
   echo "Either FIREBASE_TOKEN or GCP_SA_KEY is required to run commands with the firebase cli"
