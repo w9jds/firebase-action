@@ -21,7 +21,7 @@ If you're only doing Hosting, `Firebase Hosting Admin` is enough.
 
 * `PROJECT_PATH` - **Optional**. The path to the folder containing `firebase.json` if it doesn't exist at the root of your repository. e.g. `./my-app`
 
-`EXPORT_RUNTIME_CONFIG` - **Optional**. Exports the custom functions configuration variables `.runtimeconfig.json` to be available in later steps. e.g. `EXPORT_RUNTIME_CONFIG: true`
+* `EXPORT_RUNTIME_CONFIG` - **Optional**. Exports the custom functions configuration variables `.runtimeconfig.json` to be available in later steps. e.g. `EXPORT_RUNTIME_CONFIG: true`
 
 ## Example
 
