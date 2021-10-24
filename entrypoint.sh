@@ -8,8 +8,17 @@ if [ -z "$FIREBASE_TOKEN" ] && [ -z "$GCP_SA_KEY" ]; then
 fi
 
 if [ -n "$GCP_SA_KEY" ]; then
-  echo "Storing GCP_SA_KEY in /opt/gcp_key.json"
-  echo "$GCP_SA_KEY" | base64 -d > /opt/gcp_key.json
+  BASE64_PATTERN="([A-Za-z0-9+/]{4})*([A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{2}==)"
+
+  # If encoded base64 key, decode and save
+  if [[ "$GCP_SA_KEY" =~ $BASE64_PATTERN ]]; then
+    echo "Storing and decodeding GCP_SA_KEY in /opt/gcp_key.json"
+    echo "$GCP_SA_KEY" | base64 -d > /opt/gcp_key.json
+  else
+    echo "Storing GCP_SA_KEY in /opt/gcp_key.json"
+    echo "$GCP_SA_KEY" > /opt/gcp_key.json
+  fi
+
   echo "Exporting GOOGLE_APPLICATION_CREDENTIALS=/opt/gcp_key.json"
   export GOOGLE_APPLICATION_CREDENTIALS=/opt/gcp_key.json
 fi
