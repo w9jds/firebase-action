@@ -1,4 +1,4 @@
-FROM node:14.17.2-buster
+FROM node:14.18.1-buster
 
 LABEL version="1.2.3"
 LABEL repository="https://github.com/w9jds/firebase-action"
