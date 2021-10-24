@@ -1,4 +1,4 @@
-#!/bin/sh -l
+#!/bin/bash
 
 set -e
 
@@ -12,7 +12,7 @@ if [ -n "$GCP_SA_KEY" ]; then
 
   # If encoded base64 key, decode and save
   if [[ "$GCP_SA_KEY" =~ $BASE64_PATTERN ]]; then
-    echo "Storing and decodeding GCP_SA_KEY in /opt/gcp_key.json"
+    echo "Storing the decoded GCP_SA_KEY in /opt/gcp_key.json"
     echo "$GCP_SA_KEY" | base64 -d > /opt/gcp_key.json
   else
     echo "Storing GCP_SA_KEY in /opt/gcp_key.json"
