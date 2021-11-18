@@ -11,11 +11,12 @@ This Action for [firebase-tools](https://github.com/firebase/firebase-tools) ena
 
 * `FIREBASE_TOKEN` - **Required if GCP_SA_KEY is not set**. The token to use for authentication. This token can be aquired through the `firebase login:ci` command.
 
-* `GCP_SA_KEY` - **Required if FIREBASE_TOKEN is not set**. A base64 encoded private key (json format) for a Service Account with the `Firebase Admin` role in the project.
+* `GCP_SA_KEY` - **Required if FIREBASE_TOKEN is not set**. A **normal** service account key(json format) or a **base64 encoded** service account key with the `Firebase Admin` role in the project.
 If you're deploying functions, you would also need the `Cloud Functions Developer` role. 
 Since the deploy service account is using the App Engine default service account in the deploy process, it also 
 needs the `Service Account User` role.
 If you're only doing Hosting, `Firebase Hosting Admin` is enough.
+https://firebase.google.com/docs/hosting/github-integration
 
 * `PROJECT_ID` - **Optional**. To specify a specific project to use for all commands. Not required if you specify a project in your `.firebaserc` file.
 
