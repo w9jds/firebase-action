@@ -1,6 +1,6 @@
-FROM node:14.18.1-buster
+FROM node:16.14.0-buster
 
-LABEL version="1.2.3"
+LABEL version="1.2.4"
 LABEL repository="https://github.com/w9jds/firebase-action"
 LABEL homepage="https://github.com/w9jds/firebase-action"
 LABEL maintainer="Jeremy Shore <w9jds@github.com>"
@@ -15,8 +15,8 @@ RUN apt update && apt install -y software-properties-common
 RUN add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
 RUN apt update && apt install -y jq adoptopenjdk-8-hotspot-jre git && apt autoremove --purge -y && apt clean -y
 
-RUN npm i -g npm@7.19.1
-RUN npm i -g firebase-tools@9.21.0
+RUN npm i -g npm@8.3.1
+RUN npm i -g firebase-tools@10.2.1
 
 COPY LICENSE README.md /
 COPY "entrypoint.sh" "/entrypoint.sh"
