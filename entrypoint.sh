@@ -17,7 +17,7 @@ if [ -n "$GCP_SA_KEY" ]; then
   fi
 
   echo "Exporting GOOGLE_APPLICATION_CREDENTIALS=/opt/gcp_key.json"
-  export GOOGLE_APPLICATION_CREDENTIALS=/opt/gcp_key.json
+  export GOOGLE_APPLICATION_CREDENTIALS=$(cat /opt/gcp_key.json)
 fi
 
 if [ -n "$PROJECT_PATH" ]; then
