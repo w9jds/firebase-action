@@ -15,7 +15,7 @@ RUN apt update && apt install -y software-properties-common
 RUN add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
 RUN apt update && apt install -y jq adoptopenjdk-8-hotspot-jre git && apt autoremove --purge -y && apt clean -y
 
-RUN npm i -g npm@8.3.1
+RUN npm i -g npm@8.10.0
 RUN npm i -g firebase-tools@10.9.2
 
 COPY LICENSE README.md /
