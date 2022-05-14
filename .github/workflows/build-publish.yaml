@@ -1,9 +1,14 @@
-name: Build and push Docker images
+name: Build Docker Images
 
 on:
   push:
     branches:
       - master
+    tags:
+      - 'v*'
+  pull_request:
+    branches:
+      - 'master'
 
 jobs:
   build:
@@ -11,14 +16,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     -
+      name: Check out the repo
+      uses: actions/checkout@v3
+
+    -
+      name: Get Docker Metadata
+      id: meta
+      uses: docker/metadata-action@v4
+      with:
+        images: |
+            w9jds/firebase-action
+            ghcr.io/${{ github.repository }}
+
+    -
       name: Login to Docker Hub
-      uses: docker/login-action@v1
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v2
       with:
         username: w9jds
         password: ${{ secrets.DOCKER_PASSWORD }}
+
+    -
+      name: Log in to the Container registry
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v2
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.PACKAGES_TOKEN }}
+
     -
       name: Build and push
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v3
       with:
-        push: true
-        tags: w9jds/firebase-action:latest
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
