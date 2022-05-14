@@ -29,4 +29,9 @@ if [ -n "$PROJECT_ID" ]; then
     firebase use --add "$PROJECT_ID"
 fi
 
+if [ -n "$CONFIG_VALUES" ]; then
+    echo "Setting config for function"
+    firebase functions:config:set "$CONFIG_VALUES"
+fi
+
 sh -c "firebase $*"
