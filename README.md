@@ -6,6 +6,10 @@ This Action for [firebase-tools](https://github.com/firebase/firebase-tools) ena
 
 * `args` - **Required**. This is the arguments you want to use for the `firebase` cli
 
+## Outputs
+
+* `response` - The full response from the firebase command current run (Will most likely require a grep to get what you want, like URLS)
+
 
 ## Environment variables
 
@@ -86,6 +90,20 @@ If you want to add a message to a deployment (e.g. the Git commit message) you n
 ```yaml
         with:
           args: deploy --message \"${{ github.event.head_commit.message }}\"
+```
+
+## Alternate versions
+
+Starting with version v2.1.2 each version release will point to a versioned docker image allowing for hardening our pipeline (so things don't break when I do something dump). On top of this, you can also point to a `master` version if you would like to test out what might not be deployed into a release yet by using something like this:
+
+```yaml
+  name: Deploy to Firebase
+  uses: docker://w9jds/firebase-action:master
+  with:
+    args: deploy --only hosting
+  env:
+    FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
+
 ```
 
 ## License
