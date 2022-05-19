@@ -35,3 +35,5 @@ if [ -n "$CONFIG_VALUES" ]; then
 fi
 
 response=$(sh -c "firebase $*")
+
+echo response
