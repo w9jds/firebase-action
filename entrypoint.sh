@@ -36,4 +36,4 @@ fi
 
 response=$(sh -c "firebase $*")
 
-echo response
+echo $response
