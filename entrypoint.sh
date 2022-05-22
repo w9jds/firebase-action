@@ -34,4 +34,4 @@ if [ -n "$CONFIG_VALUES" ]; then
     firebase functions:config:set "$CONFIG_VALUES"
 fi
 
-response=$(sh -c "firebase $*") && echo $response
+sh -c "firebase $*"
