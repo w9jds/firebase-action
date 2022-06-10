@@ -34,4 +34,12 @@ if [ -n "$CONFIG_VALUES" ]; then
     firebase functions:config:set "$CONFIG_VALUES"
 fi
 
-sh -c "firebase $*"
+response=$(sh -c "firebase $*")
+
+if [ $? -eq 0 ]; then
+  echo "$response"
+  exit 0
+else
+  echo "$response"
+  exit 1
+fi
