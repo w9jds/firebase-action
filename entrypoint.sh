@@ -31,7 +31,7 @@ fi
 
 if [ -n "$CONFIG_VALUES" ]; then
     echo "Setting config for function"
-    firebase functions:config:set "$CONFIG_VALUES"
+    firebase functions:config:set $CONFIG_VALUES
 fi
 
 sh -c "firebase $*"

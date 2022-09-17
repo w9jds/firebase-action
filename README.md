@@ -13,8 +13,6 @@ This Action for [firebase-tools](https://github.com/firebase/firebase-tools) ena
 
 ## Environment variables
 
-* `FIREBASE_TOKEN` - **Required if GCP_SA_KEY is not set**. The token to use for authentication. This token can be aquired through the `firebase login:ci` command.
-
 * `GCP_SA_KEY` - **Required if FIREBASE_TOKEN is not set**. A **normal** service account key(json format) or a **base64 encoded** service account key with the needed permissions for what you are trying to deploy/update.
 If you're deploying functions, you would also need the `Cloud Functions Developer` role, and the `Cloud Scheduler Admin` for scheduled functions.
 Since the deploy service account is using the App Engine default service account in the deploy process, it also
@@ -22,11 +20,13 @@ needs the `Service Account User` role.
 If you're only doing Hosting, `Firebase Hosting Admin` is enough.
 https://firebase.google.com/docs/hosting/github-integration
 
-* `PROJECT_ID` - **Optional**. To specify a specific project to use for all commands. Not required if you specify a project in your `.firebaserc` file. If you use this, you need to give `Firebase Viewer` permission roles to your service account otherwise the action will fail with authentication errors.
+* `FIREBASE_TOKEN` - **Required if GCP_SA_KEY is not set**. **This method will soon be deprecated, use `GCP_SA_KEY` instead**. The token to use for authentication. This token can be aquired through the `firebase login:ci` command.
 
-* `PROJECT_PATH` - **Optional**. The path to the folder containing `firebase.json` if it doesn't exist at the root of your repository. e.g. `./my-app`
+* `PROJECT_ID` - **Optional**. To specify a specific project to use for all commands. Not required if you specify a project in your `.firebaserc` file. If you use this, you need to give `Viewer` permission roles to your service account otherwise the action will fail with authentication errors.
 
-* `CONFIG_VALUES` - **Optional**. The configuration values for Firebase function that would normally be set with `firebase functions:config:set [value]`
+* `PROJECT_PATH` - **Optional**. The path to the folder containing `firebase.json` if it doesn't exist at the root of your repository. e.g. `./my-app`.
+
+* `CONFIG_VALUES` - **Optional**. The configuration values for Firebase function that would normally be set with `firebase functions:config:set [value]`. Example: `CONFIG_VALUES: stripe.secret_key=SECRET_KEY zapier.secret_key=SECRET_KEY`.
 
 ## Example
 
