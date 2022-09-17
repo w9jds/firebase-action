@@ -8,7 +8,9 @@ This Action for [firebase-tools](https://github.com/firebase/firebase-tools) ena
 
 ## Outputs
 
-* `response` - The full response from the firebase command current run (Will most likely require a grep to get what you want, like URLS)
+~~* `response` - The full response from the firebase command current run (Will most likely require a grep to get what you want, like URLS)~~
+
+_**Response has been removed for now as it caused loads of issues in the bash script**_
 
 
 ## Environment variables
@@ -20,7 +22,7 @@ needs the `Service Account User` role.
 If you're only doing Hosting, `Firebase Hosting Admin` is enough.
 https://firebase.google.com/docs/hosting/github-integration
 
-* `FIREBASE_TOKEN` - **Required if GCP_SA_KEY is not set**. **This method will soon be deprecated, use `GCP_SA_KEY` instead**. The token to use for authentication. This token can be aquired through the `firebase login:ci` command.
+* `FIREBASE_TOKEN` - **Required if GCP_SA_KEY is not set**. _**This method will soon be deprecated, use `GCP_SA_KEY` instead**_. The token to use for authentication. This token can be aquired through the `firebase login:ci` command.
 
 * `PROJECT_ID` - **Optional**. To specify a specific project to use for all commands. Not required if you specify a project in your `.firebaserc` file. If you use this, you need to give `Viewer` permission roles to your service account otherwise the action will fail with authentication errors.
 
