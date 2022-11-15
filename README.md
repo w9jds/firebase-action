@@ -2,6 +2,8 @@
 
 This Action for [firebase-tools](https://github.com/firebase/firebase-tools) enables arbitrary actions with the `firebase` command-line client.
 
+If you want a more flexible implementation, an early version of a rewrite is available here: [setup-firebase](https://github.com/w9jds/setup-firebase) that allows you to choose node and java version and run more than one command.
+
 ## Inputs
 
 * `args` - **Required**. This is the arguments you want to use for the `firebase` cli
