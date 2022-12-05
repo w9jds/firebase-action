@@ -32,6 +32,12 @@ https://firebase.google.com/docs/hosting/github-integration
 
 * `CONFIG_VALUES` - **Optional**. The configuration values for Firebase function that would normally be set with `firebase functions:config:set [value]`. Example: `CONFIG_VALUES: stripe.secret_key=SECRET_KEY zapier.secret_key=SECRET_KEY`.
 
+
+### dotenv
+It's optionally possible to inject the env from an arbitrary `.env`, [as per documentation](https://firebase.google.com/docs/functions/config-env). Useful in particular when the Github Action environment (including secrets) need to be passed on to the Firebase app. 
+
+ATTENTION: It requires a step to copy the needed env inside a `.env.*` or simply `.env` file in the root folder.
+
 ## Example
 
 To authenticate with Firebase, and deploy to Firebase Hosting:
