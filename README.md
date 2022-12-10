@@ -17,12 +17,14 @@ _**Response has been removed for now as it caused loads of issues in the bash sc
 
 ## Environment variables
 
-* `GCP_SA_KEY` - **Required if FIREBASE_TOKEN is not set**. A **normal** service account key(json format) or a **base64 encoded** service account key with the needed permissions for what you are trying to deploy/update.
-If you're deploying functions, you would also need the `Cloud Functions Developer` role, and the `Cloud Scheduler Admin` for scheduled functions.
-Since the deploy service account is using the App Engine default service account in the deploy process, it also
-needs the `Service Account User` role.
-If you're only doing Hosting, `Firebase Hosting Admin` is enough.
-https://firebase.google.com/docs/hosting/github-integration
+* `GCP_SA_KEY` - **Required if FIREBASE_TOKEN is not set**. A **normal** service account key (json format) or a **base64 encoded** service account key with the needed permissions for what you are trying to deploy/update.
+  * If deploying functions, you would also need the `Cloud Functions Developer` role.
+  * If the deploy has scheduled functions, include the `Cloud Scheduler Admin` role.
+  * Since the service account is using the App Engine default service account in the deploy process, it also needs the `Service Account User` role.
+  * If updating Firestore Rules, include the `Firebase Rules Admin` role.
+  * If updating Firestore Indexes, include the `Cloud Datastore Index Admin` role.
+  * If deplying Hosting files, include the `Firebase Hosting Admin` role.
+  * For more details: https://firebase.google.com/docs/hosting/github-integration
 
 * `FIREBASE_TOKEN` - **Required if GCP_SA_KEY is not set**. _**This method will soon be deprecated, use `GCP_SA_KEY` instead**_. The token to use for authentication. This token can be aquired through the `firebase login:ci` command.
 
