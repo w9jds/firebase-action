@@ -18,11 +18,11 @@ _**Response has been removed for now as it caused loads of issues in the bash sc
 ## Environment variables
 
 * `GCP_SA_KEY` - **Required if FIREBASE_TOKEN is not set**. A **normal** service account key (json format) or a **base64 encoded** service account key with the needed permissions for what you are trying to deploy/update.
-  * If deploying functions, you would also need the `Cloud Functions Developer` role.
-  * If the deploy has scheduled functions, include the `Cloud Scheduler Admin` role.
-  * If the deploy requires access to secrets, include the `Secret Manager Viewer` role.
   * Since the service account is using the App Engine default service account in the deploy process, it also needs the `Service Account User` role.
-  * If updating Firestore Rules, include the `Firebase Rules Admin` role.
+  * If deploying functions, you would also need the `Cloud Functions Developer` role.
+    * If the deploy has scheduled functions, include the `Cloud Scheduler Admin` role.
+    * If the deploy requires access to secrets, include the `Secret Manager Viewer` role.
+    * If updating Firestore Rules, include the `Firebase Rules Admin` role.
   * If updating Firestore Indexes, include the `Cloud Datastore Index Admin` role.
   * If deplying Hosting files, include the `Firebase Hosting Admin` role.
   * For more details: https://firebase.google.com/docs/hosting/github-integration
