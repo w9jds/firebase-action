@@ -13,7 +13,7 @@ LABEL com.github.actions.color="gray-dark"
 RUN apt update && apt-get install --no-install-recommends -y jq openjdk-11-jre && rm -rf /var/lib/apt/lists/*;
 
 RUN npm i -g npm@8.10.0 && npm cache clean --force;
-RUN npm i -g firebase-tools@12.6.2 && npm cache clean --force;
+RUN npm i -g firebase-tools@12.7.0 && npm cache clean --force;
 
 COPY LICENSE README.md /
 COPY "entrypoint.sh" "/entrypoint.sh"
