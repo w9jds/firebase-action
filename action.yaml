@@ -12,4 +12,4 @@ outputs:
 
 runs:
   using: "docker"
-  image: "docker://w9jds/firebase-action:v12.6.2"
+  image: "docker://w9jds/firebase-action:v12.7.0"
