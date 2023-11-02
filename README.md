@@ -23,6 +23,7 @@ _**Response has been removed for now as it caused loads of issues in the bash sc
     * If the deploy has scheduled functions, include the `Cloud Scheduler Admin` role.
     * If the deploy requires access to secrets, include the `Secret Manager Viewer` role.
     * If updating Firestore Rules, include the `Firebase Rules Admin` role.
+    * If the project is using Blocking functions (beforeCreate or beforeSignin) , include the `Firebase Functions Admin` role.
   * If updating Firestore Indexes, include the `Cloud Datastore Index Admin` role.
   * If deplying Hosting files, include the `Firebase Hosting Admin` role.
   * For more details: https://firebase.google.com/docs/hosting/github-integration
