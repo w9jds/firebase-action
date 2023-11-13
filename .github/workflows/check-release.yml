@@ -10,6 +10,8 @@ jobs:
     outputs:
       # A semver comparison result - We are the base, firebase-tools is the compare-to
       comparison: ${{ steps.compare_versions.outputs.comparison-result }}
+      firebase-actions-release: ${{ fromJSON(steps.get_our_release.outputs.data).tag_name }}
+      firebase-tools-release: ${{ fromJSON(steps.get_their_release.outputs.data).tag_name }}
     steps:
       - name: Check our latest release
         uses: octokit/request-action@v2.x
@@ -41,3 +43,32 @@ jobs:
         run: echo "Their latest release is ${{ fromJSON(steps.get_their_release.outputs.data).tag_name }}"
       - name: Print the result
         run: echo "${{ fromJSON(steps.get_our_release.outputs.data).tag_name }} ${{ steps.compare_versions.outputs.comparison-result }} ${{ fromJSON(steps.get_their_release.outputs.data).tag_name }}"
+
+  bump-version:
+    needs: check-releases
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    if: ${{ needs.check-releases.outputs.comparison == '<' }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Bump version
+        run: |
+          OLD_VERSION=${{ needs.check-releases.outputs.firebase-actions-release }} # get old version
+          NEW_VERSION=${{ needs.check-releases.outputs.firebase-tools-release }} # get new version
+          OLD_VERSION=${OLD_VERSION#v} && NEW_VERSION=${NEW_VERSION#v} # remove the 'v' from the version strings          
+          sed -i "s|${OLD_VERSION}|${NEW_VERSION}|g" Dockerfile
+          sed -i "s|${OLD_VERSION}|${NEW_VERSION}|g" action.yaml
+
+      #   - name: print file contents for debug
+      #     run: |
+      #       cat Dockerfile
+      #       cat action.yaml
+
+      - name: Commit and push
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          tagging_message: "${{ needs.check-releases.outputs.firebase-tools-release }}"
+          commit_message: "Bump version to ${{ needs.check-releases.outputs.firebase-tools-release }}"
