@@ -1,0 +1,43 @@
+name: Check for firebase-tools releases
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+
+jobs:
+  check-releases:
+    runs-on: ubuntu-latest
+    outputs:
+      # A semver comparison result - We are the base, firebase-tools is the compare-to
+      comparison: ${{ steps.compare_versions.outputs.comparison-result }}
+    steps:
+      - name: Check our latest release
+        uses: octokit/request-action@v2.x
+        id: get_our_release
+        with:
+          route: GET /repos/w9jds/firebase-action/releases/latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check latest firebase-tools release
+        uses: octokit/request-action@v2.x
+        id: get_their_release
+        with:
+          route: GET /repos/firebase/firebase-tools/releases/latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: madhead/semver-utils@latest
+        id: compare_versions
+        with:
+          # A version to work with
+          version: "${{ fromJSON(steps.get_our_release.outputs.data).tag_name }}"
+          # A version to compare against
+          compare-to: "${{ fromJSON(steps.get_their_release.outputs.data).tag_name }}"
+
+      - name: Print our release version
+        run: echo "Our latest release is ${{ fromJSON(steps.get_our_release.outputs.data).tag_name }}"
+      - name: Print their release version
+        run: echo "Their latest release is ${{ fromJSON(steps.get_their_release.outputs.data).tag_name }}"
+      - name: Print the result
+        run: echo "${{ fromJSON(steps.get_our_release.outputs.data).tag_name }} ${{ steps.compare_versions.outputs.comparison-result }} ${{ fromJSON(steps.get_their_release.outputs.data).tag_name }}"
