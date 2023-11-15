@@ -70,9 +70,10 @@ jobs:
           include: "?(Dockerfile|action.yaml)"
           regex: false
 
-      - name: Commit and push
-        uses: stefanzweifel/git-auto-commit-action@v5
-        with:
-          branch: master
-          tagging_message: "${{ needs.check-releases.outputs.firebase-tools-release }}"
-          commit_message: "Bump version to ${{ needs.check-releases.outputs.firebase-tools-release }}"
+      - name: Commit & Push changes
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git commit -a -m "Bump firebase-tools to ${{ needs.check-releases.outputs.firebase-tools-release }}"
+          git tag -a ${{ needs.check-releases.outputs.firebase-tools-release }} -m "Bump firebase-tools to ${{ needs.check-releases.outputs.firebase-tools-release }}"
+          git push origin HEAD:${{ github.ref }} --tags
