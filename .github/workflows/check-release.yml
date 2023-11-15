@@ -55,15 +55,20 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Bump version
-        env:
-          OLD_VERSION: "${{ needs.check-releases.outputs.firebase-actions-release }}"
-          NEW_VERSION: "${{ needs.check-releases.outputs.firebase-tools-release }}"
+      - name: Remove leading 'v' from version numbers
         run: |
-          OLD_VERSION=${OLD_VERSION#v} \
-            NEW_VERSION=${NEW_VERSION#v}\
-            sed -i "s|${OLD_VERSION}|${NEW_VERSION}|g" Dockerfile \
-            sed -i "s|${OLD_VERSION}|${NEW_VERSION}|g" action.yaml \
+          FIREBASE_ACTIONS_RELEASE=${{ needs.check-releases.outputs.firebase-actions-release }}
+          FIREBASE_TOOLS_RELEASE=${{ needs.check-releases.outputs.firebase-tools-release }}
+          echo "FIREBASE_ACTIONS_RELEASE=${FIREBASE_ACTIONS_RELEASE#v}" >> $GITHUB_ENV
+          echo "FIREBASE_TOOLS_RELEASE=${FIREBASE_TOOLS_RELEASE#v}" >> $GITHUB_ENV
+
+      - name: Bump version
+        uses: jacobtomlinson/gha-find-replace@v3
+        with:
+          find: "${{ env.FIREBASE_ACTIONS_RELEASE }}"
+          replace: "${{ env.FIREBASE_TOOLS_RELEASE }}"
+          include: "?(Dockerfile|action.yaml)"
+          regex: false
 
       - name: print file contents for debug
         run: |
