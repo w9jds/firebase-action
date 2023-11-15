@@ -65,6 +65,7 @@ jobs:
           echo "FIREBASE_TOOLS_RELEASE=${FIREBASE_TOOLS_RELEASE#v}" >> $GITHUB_ENV
 
       - name: Bump version
+        id: bump-version
         uses: jacobtomlinson/gha-find-replace@v3
         with:
           find: "${{ env.FIREBASE_ACTIONS_RELEASE }}"
@@ -73,6 +74,7 @@ jobs:
           regex: false
 
       - name: Commit & Push changes
+        if: ${{ steps.bump-version.outputs.modifiedFiles > 0 }}
         run: |
           git config --local user.email "github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
