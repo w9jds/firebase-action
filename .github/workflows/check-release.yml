@@ -57,11 +57,11 @@ jobs:
 
       - name: Bump version
         run: |
-          OLD_VERSION=${{ needs.check-releases.outputs.firebase-actions-release }} # get old version
-          NEW_VERSION=${{ needs.check-releases.outputs.firebase-tools-release }} # get new version
-          OLD_VERSION=${OLD_VERSION#v} && NEW_VERSION=${NEW_VERSION#v} # remove the 'v' from the version strings          
-          sed -i "s|${OLD_VERSION}|${NEW_VERSION}|g" Dockerfile
-          sed -i "s|${OLD_VERSION}|${NEW_VERSION}|g" action.yaml
+          OLD_VERSION=${{ needs.check-releases.outputs.firebase-actions-release }} # get old version \
+          NEW_VERSION=${{ needs.check-releases.outputs.firebase-tools-release }} # get new version \
+          OLD_VERSION=${OLD_VERSION#v} && NEW_VERSION=${NEW_VERSION#v} # remove the 'v' from the version strings \
+          sed -i "s|${OLD_VERSION}|${NEW_VERSION}|g" Dockerfile \
+          sed -i "s|${OLD_VERSION}|${NEW_VERSION}|g" action.yaml \
 
       #   - name: print file contents for debug
       #     run: |
