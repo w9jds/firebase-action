@@ -53,7 +53,7 @@ jobs:
     if: ${{ needs.check-releases.outputs.comparison == '<' }}
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
 
       - name: Remove leading 'v' from version numbers
         run: |
@@ -73,5 +73,6 @@ jobs:
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
+          branch: master
           tagging_message: "${{ needs.check-releases.outputs.firebase-tools-release }}"
           commit_message: "Bump version to ${{ needs.check-releases.outputs.firebase-tools-release }}"
