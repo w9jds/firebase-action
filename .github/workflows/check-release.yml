@@ -70,7 +70,7 @@ jobs:
         with:
           find: "${{ env.FIREBASE_ACTIONS_RELEASE }}"
           replace: "${{ env.FIREBASE_TOOLS_RELEASE }}"
-          include: "?(Dockerfile|action.yaml)"
+          include: "{Dockerfile,action.yaml}"
           regex: false
 
       - name: Commit & Push changes
