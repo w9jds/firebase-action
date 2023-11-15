@@ -54,6 +54,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        with:
+          ref: ${{ github.ref }}
 
       - name: Remove leading 'v' from version numbers
         run: |
