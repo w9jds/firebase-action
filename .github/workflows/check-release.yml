@@ -70,11 +70,6 @@ jobs:
           include: "?(Dockerfile|action.yaml)"
           regex: false
 
-      - name: print file contents for debug
-        run: |
-          cat Dockerfile
-          cat action.yaml
-
       - name: Commit and push
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
