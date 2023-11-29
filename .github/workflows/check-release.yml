@@ -18,7 +18,7 @@ jobs:
         uses: octokit/request-action@v2.x
         id: get_our_release
         with:
-          route: GET /repos/w9jds/firebase-action/releases/latest
+          route: GET /repos/${{ github.REPOSITORY }}/releases/latest
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
