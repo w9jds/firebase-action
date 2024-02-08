@@ -86,7 +86,7 @@ jobs:
         id: create_release
         uses: comnoco/create-release-action@v2.0.5
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # This token is provided by Actions, you do not need to create your own token
+          GITHUB_TOKEN: ${{ secrets.RELEASE_TOKEN }} # Can't use a GITHUB_TOKEN for this or other actions won't be triggered on a new release
         with:
           tag_name: ${{ needs.check-releases.outputs.firebase-tools-release }}
           release_name: firebase-tools ${{ needs.check-releases.outputs.firebase-tools-release }}
