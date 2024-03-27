@@ -2,8 +2,8 @@
 
 set -e
 
-if [ -z "$FIREBASE_TOKEN" ] && [ -z "$GCP_SA_KEY" ]; then
-  echo "Either FIREBASE_TOKEN or GCP_SA_KEY is required to run commands with the firebase cli"
+if [ -z "$FIREBASE_TOKEN" ] && [ -z "$GCP_SA_KEY" ] && [ -z "$GOOGLE_APPLICATION_CREDENTIALS" ]; then
+  echo "Either FIREBASE_TOKEN or GCP_SA_KEY or GOOGLE_APPLICATION_CREDENTIALS is required to run commands with the firebase cli"
   exit 126
 fi
 
