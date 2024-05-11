@@ -13,6 +13,7 @@ jobs:
       comparison: ${{ steps.compare_versions.outputs.comparison-result }}
       firebase-actions-release: ${{ fromJSON(steps.get_our_release.outputs.data).tag_name }}
       firebase-tools-release: ${{ fromJSON(steps.get_their_release.outputs.data).tag_name }}
+
     steps:
       - name: Check our latest release
         uses: octokit/request-action@v2.x
@@ -93,3 +94,41 @@ jobs:
           body: "Bump `firebase-tools` to ${{ needs.check-releases.outputs.firebase-tools-release }}"
           draft: false
           prerelease: false
+  
+  publish:
+    name: Docker build & push
+    needs: bump-version
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out the repo
+      uses: actions/checkout@v3
+
+    - name: Get Docker Metadata
+      id: meta
+      uses: docker/metadata-action@v5
+      with:
+        images: |
+            w9jds/firebase-action
+            ghcr.io/${{ github.repository }}
+
+    - name: Login to Docker Hub
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v3
+      with:
+        username: w9jds
+        password: ${{ secrets.DOCKER_PASSWORD }}
+
+    - name: Log in to the Container registry
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v3
+      with:
+        registry: ghcr.io
+        username: ${{ github.actor }}
+        password: ${{ secrets.PACKAGES_TOKEN }}
+
+    - name: Build and push
+      uses: docker/build-push-action@v5
+      with:
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
