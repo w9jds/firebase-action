@@ -39,18 +39,22 @@ jobs:
           # A version to compare against
           compare-to: "${{ fromJSON(steps.get_their_release.outputs.data).tag_name }}"
 
-      - name: Print our release version
-        run: echo "Our latest release is ${{ fromJSON(steps.get_our_release.outputs.data).tag_name }}"
-      - name: Print their release version
-        run: echo "Their latest release is ${{ fromJSON(steps.get_their_release.outputs.data).tag_name }}"
-      - name: Print the result
-        run: echo "${{ fromJSON(steps.get_our_release.outputs.data).tag_name }} ${{ steps.compare_versions.outputs.comparison-result }} ${{ fromJSON(steps.get_their_release.outputs.data).tag_name }}"
+      # - name: Print our release version
+      #   run: echo "Our latest release is ${{ fromJSON(steps.get_our_release.outputs.data).tag_name }}"
+      # - name: Print their release version
+      #   run: echo "Their latest release is ${{ fromJSON(steps.get_their_release.outputs.data).tag_name }}"
+      # - name: Print the result
+      #   run: echo "${{ fromJSON(steps.get_our_release.outputs.data).tag_name }} ${{ steps.compare_versions.outputs.comparison-result }} ${{ fromJSON(steps.get_their_release.outputs.data).tag_name }}"
 
   bump-version:
     needs: check-releases
     permissions:
       contents: write
     runs-on: ubuntu-latest
+
+    # outputs:
+    #   new-version: ${{ steps.set-version.outputs.version }}
+
     if: ${{ needs.check-releases.outputs.comparison == '<' }}
     steps:
       - name: Checkout code
@@ -73,6 +77,9 @@ jobs:
           replace: "${{ env.FIREBASE_TOOLS_RELEASE }}"
           include: "{Dockerfile,action.yaml}"
           regex: false
+      
+      # - id: set-version
+      #   run: echo "version=${{env.FIREBASE_TOOLS_RELEASE}}" >> "$GITHUB_OUTPUT"
 
       - name: Commit & Push changes
         if: ${{ steps.bump-version.outputs.modifiedFiles > 0 }}
@@ -110,6 +117,9 @@ jobs:
         images: |
             w9jds/firebase-action
             ghcr.io/${{ github.repository }}
+    
+    - name: environments
+      run: echo "New version Environment - ${{ env.FIREBASE_TOOLS_RELEASE }}"
 
     - name: Login to Docker Hub
       if: github.event_name != 'pull_request'
@@ -130,5 +140,5 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: ${{ github.event_name != 'pull_request' }}
-        tags: ${{ steps.meta.outputs.tags }}
+        tags: v${{ env.FIREBASE_TOOLS_RELEASE }}
         labels: ${{ steps.meta.outputs.labels }}
