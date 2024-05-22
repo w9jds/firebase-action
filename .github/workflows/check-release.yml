@@ -52,8 +52,8 @@ jobs:
       contents: write
     runs-on: ubuntu-latest
 
-    # outputs:
-    #   new-version: ${{ steps.set-version.outputs.version }}
+    outputs:
+      new-version: ${{  needs.check-releases.outputs.firebase-tools-release }}
 
     if: ${{ needs.check-releases.outputs.comparison == '<' }}
     steps:
@@ -119,7 +119,7 @@ jobs:
             ghcr.io/${{ github.repository }}
     
     - name: environments
-      run: echo "New version Environment - ${{ env.FIREBASE_TOOLS_RELEASE }}"
+      run: echo "New version Environment Variable - ${{ needs.bump-version.outputs.new-version }}"
 
     - name: Login to Docker Hub
       if: github.event_name != 'pull_request'
@@ -140,5 +140,5 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: ${{ github.event_name != 'pull_request' }}
-        tags: v${{ env.FIREBASE_TOOLS_RELEASE }}
+        tags: v${{ needs.bump-version.outputs.new-version }}
         labels: ${{ steps.meta.outputs.labels }}
