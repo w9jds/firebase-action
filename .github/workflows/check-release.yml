@@ -107,29 +107,19 @@ jobs:
     needs: bump-version
     runs-on: ubuntu-latest
     steps:
-    - name: Check out the repo
+    - 
+      name: Check out the repo
       uses: actions/checkout@v3
-
-    - name: Get Docker Metadata
-      id: meta
-      uses: docker/metadata-action@v4
-      with:
-        images: |
-            w9jds/firebase-action
-            ghcr.io/${{ github.repository }}
     
-    - name: environments
-      run: echo "New version Environment Variable - ${{ needs.bump-version.outputs.new-version }}"
-
-    - name: Login to Docker Hub
-      if: github.event_name != 'pull_request'
+    - 
+      name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
         username: w9jds
         password: ${{ secrets.DOCKER_PASSWORD }}
 
-    - name: Log in to the Container registry
-      if: github.event_name != 'pull_request'
+    - 
+      name: Log in to the Container registry
       uses: docker/login-action@v2
       with:
         registry: ghcr.io
@@ -140,5 +130,7 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: ${{ github.event_name != 'pull_request' }}
-        tags: ${{ needs.bump-version.outputs.new-version }}
+        tags: 
+          w9jds/firebase-action:${{ needs.bump-version.outputs.new-version }}
+          ghcr.io/${{ github.repository }}:${{ needs.bump-version.outputs.new-version }}
         labels: ${{ steps.meta.outputs.labels }}
