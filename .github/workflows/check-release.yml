@@ -112,6 +112,15 @@ jobs:
       uses: actions/checkout@v3
     
     - 
+      name: Get Docker Metadata
+      id: meta
+      uses: docker/metadata-action@v4
+      with:
+        images: |
+            w9jds/firebase-action
+            ghcr.io/${{ github.repository }}
+
+    - 
       name: Login to Docker Hub
       uses: docker/login-action@v2
       with:
