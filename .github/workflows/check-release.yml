@@ -117,7 +117,7 @@ jobs:
       uses: docker/metadata-action@v4
       with:
         tags: |
-          ${{needs.bump-version.outputs.new-version}}
+          ${{ needs.bump-version.outputs.new-version }}
         images: |
           w9jds/firebase-action
           ghcr.io/${{ github.repository }}
