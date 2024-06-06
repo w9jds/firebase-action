@@ -118,6 +118,8 @@ jobs:
       id: meta
       uses: docker/metadata-action@v4
       with:
+        labels: |
+          latest
         tags: |
           ${{ needs.bump-version.outputs.new-version }}
         images: |
