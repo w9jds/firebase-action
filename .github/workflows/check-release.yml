@@ -117,8 +117,10 @@ jobs:
       uses: docker/metadata-action@v4
       with:
         images: |
-            w9jds/firebase-action
-            ghcr.io/${{ github.repository }}
+          w9jds/firebase-action
+          ghcr.io/${{ github.repository }}
+        tags: |
+          type=semver,pattern=${{needs.bump-version.outputs.new-version}}
 
     - 
       name: Login to Docker Hub
@@ -139,7 +141,5 @@ jobs:
       uses: docker/build-push-action@v3
       with:
         push: ${{ github.event_name != 'pull_request' }}
-        tags: 
-          w9jds/firebase-action:${{ needs.bump-version.outputs.new-version }}
-          ghcr.io/${{ github.repository }}:${{ needs.bump-version.outputs.new-version }}
+        tags: ${{ steps.meta.outputs.tags }}
         labels: ${{ steps.meta.outputs.labels }}
