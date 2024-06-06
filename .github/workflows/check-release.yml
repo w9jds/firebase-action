@@ -110,6 +110,8 @@ jobs:
     - 
       name: Check out the repo
       uses: actions/checkout@v3
+      with:
+        ref: ${{ needs.bump-version.outputs.new-version }}
     
     - 
       name: Get Docker Metadata
