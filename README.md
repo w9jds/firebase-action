@@ -25,7 +25,8 @@ _**Response has been removed for now as it caused loads of issues in the bash sc
     * If updating Firestore Rules, include the `Firebase Rules Admin` role.
     * If the project is using Blocking functions (beforeCreate or beforeSignin) , include the `Firebase Functions Admin` role.
   * If updating Firestore Indexes, include the `Cloud Datastore Index Admin` role.
-  * If deplying Hosting files, include the `Firebase Hosting Admin` role.
+  * If deploying Hosting files, include the `Firebase Hosting Admin` role.
+  * If updating Remote Config, include the `Firebase Remote Config Admin` role.
   * For more details: https://firebase.google.com/docs/hosting/github-integration
 
 * `FIREBASE_TOKEN` - **Required if GCP_SA_KEY is not set**. _**This method will soon be deprecated, use `GCP_SA_KEY` instead**_. The token to use for authentication. This token can be aquired through the `firebase login:ci` command.
