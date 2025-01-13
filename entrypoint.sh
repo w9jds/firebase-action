@@ -34,7 +34,14 @@ if [ -n "$CONFIG_VALUES" ]; then
     firebase functions:config:set $CONFIG_VALUES
 fi
 
-sh -c "firebase $*"
+for arg in "$@"; do
+  echo "Running: firebase $arg"
+  firebase "$arg"
+  if [ $? -ne 0 ]; then
+    echo "Error: Command 'firebase $arg' failed."
+    exit 1
+  fi
+done
 
 # response=$(firebase $*)
 

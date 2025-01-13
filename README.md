@@ -6,7 +6,8 @@ If you want a more flexible implementation, an early version of a rewrite is ava
 
 ## Inputs
 
-* `args` - **Required**. This is the arguments you want to use for the `firebase` cli
+* `args` - **Required**. These are the arguments you want to use for the
+  `firebase` cli. Arguments will be treated sequentially.
 
 ## Outputs
 
@@ -81,7 +82,7 @@ jobs:
       - name: Deploy to Firebase
         uses: w9jds/firebase-action@master
         with:
-          args: deploy --only hosting
+          args: ["deploy --only hosting"]
         env:
           FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 ```
@@ -94,13 +95,13 @@ Alternatively:
 
 
 If you have multiple hosting environments you can specify which one in the args line.
-e.g. `args: deploy --only hosting:[environment name]`
+e.g. `args: ["deploy --only hosting:<environment name>"]`
 
 If you want to add a message to a deployment (e.g. the Git commit message) you need to take extra care and escape the quotes or the YAML breaks.
 
 ```yaml
         with:
-          args: deploy --message \"${{ github.event.head_commit.message }}\"
+          args: ["deploy --message \"${{ github.event.head_commit.message }}\""]
 ```
 
 ## Alternate versions
@@ -111,7 +112,7 @@ Starting with version v2.1.2 each version release will point to a versioned dock
   name: Deploy to Firebase
   uses: docker://w9jds/firebase-action:master
   with:
-    args: deploy --only hosting
+    args: ["deploy --only hosting"]
   env:
     FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
 
