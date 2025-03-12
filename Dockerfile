@@ -1,6 +1,6 @@
 FROM node:20-buster
 
-LABEL version="13.33.0"
+LABEL version="13.34.0"
 LABEL repository="https://github.com/w9jds/firebase-action"
 LABEL homepage="https://github.com/w9jds/firebase-action"
 LABEL maintainer="Jeremy Shore <w9jds@github.com>"
@@ -13,7 +13,7 @@ LABEL com.github.actions.color="gray-dark"
 RUN apt update && apt-get install --no-install-recommends -y jq openjdk-11-jre && rm -rf /var/lib/apt/lists/*
 
 RUN npm i -g npm@8.10.0 && npm cache clean --force
-RUN npm i -g firebase-tools@13.33.0 && npm cache clean --force
+RUN npm i -g firebase-tools@13.34.0 && npm cache clean --force
 
 COPY LICENSE README.md /
 COPY "entrypoint.sh" "/entrypoint.sh"
