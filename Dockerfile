@@ -10,7 +10,7 @@ LABEL com.github.actions.description="Wraps the firebase-tools CLI to enable com
 LABEL com.github.actions.icon="package"
 LABEL com.github.actions.color="gray-dark"
 
-# RUN apt update && apt-get install --no-install-recommends -y jq openjdk-11-jre-headless && rm -rf /var/lib/apt/lists/*
+RUN apt update && apt-get install --no-install-recommends -y jq && rm -rf /var/lib/apt/lists/*
 
 RUN npm i -g npm@10.9.2 && npm cache clean --force
 RUN npm i -g firebase-tools@14.11.2 && npm cache clean --force
