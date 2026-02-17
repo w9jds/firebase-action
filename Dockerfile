@@ -16,6 +16,7 @@ RUN npm i -g npm@10.9.2 && npm cache clean --force
 RUN npm i -g firebase-tools@15.6.0 && npm cache clean --force
 
 COPY LICENSE README.md /
+COPY *.env /
 COPY "entrypoint.sh" "/entrypoint.sh"
 
 ENTRYPOINT ["/entrypoint.sh"]
