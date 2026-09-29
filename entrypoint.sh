@@ -26,7 +26,7 @@ fi
 
 if [ -n "$PROJECT_ID" ]; then
     echo "setting firebase project to $PROJECT_ID"
-    firebase use --add "$PROJECT_ID"
+    firebase use "$PROJECT_ID"
 fi
 
 if [ -n "$CONFIG_VALUES" ]; then
