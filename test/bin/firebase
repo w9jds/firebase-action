@@ -1,0 +1,4 @@
+#!/bin/sh
+# Test double: record the firebase invocation and succeed.
+printf '%s\n' "$*" >> "${FIREBASE_MOCK_LOG:-/tmp/firebase-calls.log}"
+exit 0
